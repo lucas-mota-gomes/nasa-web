@@ -1,11 +1,14 @@
 <section class="w-screen h-screen" style="background-color: #1e1e1e;">
     <div class="flex flex-column gap-2 align-items-center py-8">
-        <div class="w-7rem h-7rem bg-white border-circle"></div>
-        <h1 class="text-white font-light mb-8">GALATICS.RATS</h1>
-
+        <img class="w-full lg:w-auto" src="assets/logo.png" alt="">
     </div>
+
     <div class="w-full flex justify-content-center">
-    <p-autoComplete class="autocomplete-home" [(ngModel)]="selectedItem" [suggestions]="suggestions" [showClear]="true"
-        (completeMethod)="search($event)" placeholder="Search" [dropdown]="true"></p-autoComplete>
+        <div class="flex justify-content-center relative align-content-center" style="width: 70%;">
+            <p-autoComplete class="autocomplete-home" [(ngModel)]="selectedItem" (onSelect)="select()" optionLabel="label" [suggestions]="suggestions"
+                [showClear]="true" (completeMethod)="search($event)" [lazy]="true"
+                placeholder="Search"></p-autoComplete>
+            <i class="pi pi-search absolute text-3xl cursor-pointer" style="top: 30%; right: 2%;"></i>
+        </div>
     </div>
 </section>

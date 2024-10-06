@@ -1,0 +1,11 @@
+.multi *{
+    background-color: black;
+    color: white;
+    font-weight: bolder;
+}
+
+.data-table {
+    & td, th, tr{
+        white-space: nowrap;
+    }
+}
