@@ -1,4 +1,10 @@
-<section>
-    <h1>Home</h1>
-    <p>Welcome to the home page!</p>
+<section class="w-screen h-screen" style="background-color: #1e1e1e;">
+    <div class="flex flex-column gap-2 align-items-center py-8">
+        <div class="w-7rem h-7rem bg-white border-circle"></div>
+        <h1 class="text-white font-light">GALATICS.RATS</h1>
+        <div class="relative">
+            <p-autoComplete class="autocomplete-home" [(ngModel)]="selectedItem" [suggestions]="suggestions" [showClear]="true" (completeMethod)="search($event)" placeholder="Search" [dropdown]="true"></p-autoComplete>
+        </div>
+
+    </div>
 </section>

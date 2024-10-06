@@ -1,0 +1,18 @@
+.autocomplete-home {
+    width: 70%;
+
+    & input {
+        width: 100%;
+        background-color: #eaedf3;
+    }
+
+    & div{
+        width: 100%;
+    }
+
+    & button{
+        background-color: #eaedf379;
+        color: white;
+        border: none;
+    }
+}
