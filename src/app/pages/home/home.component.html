@@ -4,10 +4,15 @@
     </div>
 
     <div class="w-full flex justify-content-center">
+        <div class="flex justify-content-center relative align-content-center text-white" style="width: 70%;">
+           <p class="fadeinleft animation-duration-1000 "> Search with themes, titles, samples or other words of interest and the experiment number.</p>
+        </div>
+    </div>
+    <div class="w-full flex justify-content-center">
         <div class="flex justify-content-center relative align-content-center" style="width: 70%;">
-            <p-autoComplete class="autocomplete-home" [(ngModel)]="selectedItem" (onSelect)="select()" optionLabel="label" [suggestions]="suggestions"
-                [showClear]="true" (completeMethod)="search($event)" [lazy]="true"
-                placeholder="Search"></p-autoComplete>
+            <p-autoComplete class="autocomplete-home" [(ngModel)]="selectedItem" (onSelect)="select()"
+                optionLabel="label" [suggestions]="suggestions" [showClear]="true" (completeMethod)="search($event)"
+                [lazy]="true" placeholder="Search"></p-autoComplete>
             <i class="pi pi-search absolute text-3xl cursor-pointer" style="top: 30%; right: 2%;"></i>
         </div>
     </div>

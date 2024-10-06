@@ -11,7 +11,7 @@
             <i class="pi pi-arrow-left font-bold"></i>
             <b>GO BACK</b>
         </div>
-        <div class="flex gap-4">
+        <div class="flex gap-4 flex-column lg:flex-row align-items-center lg:align-content-start">
             <div class="flex flex-column align-items-center w-fit gap-3 justify-content-between">
                 <img [src]="'https://osdr.nasa.gov'+data.info._source.thumbnail" alt="">
                 <div
@@ -21,7 +21,7 @@
             </div>
 
             <div class="flex flex-column h-fit w-full gap-4">
-                <div class="flex w-full justify-content-between ">
+                <div class="flex w-full justify-content-center lg:justify-content-between ">
                     <div class="flex gap-3">
                         <p-button label="OSD - {{id}}" class="bg-black-alpha-90 text-white border-round-3xl"
                             [style]="{'background-color': 'black', 'border': 'none'}"></p-button>
@@ -57,7 +57,7 @@
         </div>
 
         <p-button [disabled]="aiResponse" (onClick)="getAiresponse()" label="Generate AI resume"
-        class="bg-black-alpha-90 text-black-alpha-90 border-round w-fit"
+        class="bg-black-alpha-90 text-black-alpha-90 border-round w-full lg:w-fit"
         [style]="{'background-color': 'black', 'border': 'none'}"></p-button>
 
         @if (aiResponse) {
@@ -77,8 +77,8 @@
             }
         </div>
 
-        <div class="flex gap-3">
-            <div class="flex flex-column gap-3 w-5">
+        <div class="flex gap-3 flex-column lg:flex-row">
+            <div class="flex flex-column gap-3 w-full lg:w-5">
                 <p-multiSelect [options]="getCols(studyResult.assays[0].table.table[0])" [(ngModel)]="selectedCols"
                     [filter]="false" class="multi"
                     [style]="{'width':'100%', 'color': 'white', 'background-color': 'black'}"
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="w-11 h-full bg-white overflow-hidden border-round data-table">
+            <div class="lg:w-11 w-full h-full bg-white overflow-hidden border-round data-table">
                 @if (studyResult && selectedCols) {
                 <p-table [paginator]="true" [rows]="4" [value]="studyResult.assays[0].table.table"
                     [tableStyle]="{ 'min-width': '50rem' }">
