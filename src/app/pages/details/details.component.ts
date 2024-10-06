@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -18,7 +18,7 @@ interface City {
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [ButtonModule, ChartModule, MultiSelectModule, FormsModule, StyleClassModule, TableModule, ProgressSpinnerModule, MarkdownModule],
+  imports: [ButtonModule, ChartModule, MultiSelectModule, FormsModule, StyleClassModule, TableModule, ProgressSpinnerModule, MarkdownModule, RouterModule],
   providers: [MarkdownService],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',

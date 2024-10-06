@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
       console.log("🚀 ~ HomeComponent ~ this.experimentService.serachByTerm ~ data:", data)
       this.suggestions = data.hits.map((item: any) => {
         return {
-          label: item._source.Accession + ' - ' + item._index,
+          label: item._source.Accession + ' - ' + item._source["Study Title"],
           info: item
         }
       });
