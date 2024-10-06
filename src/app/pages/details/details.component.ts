@@ -9,6 +9,8 @@ import { ExperimentService } from '../../service/experiment.service';
 import { TableModule } from 'primeng/table';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
+import { AccordionModule } from 'primeng/accordion';
+
 
 interface City {
   name: string,
@@ -18,7 +20,7 @@ interface City {
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [ButtonModule, ChartModule, MultiSelectModule, FormsModule, StyleClassModule, TableModule, ProgressSpinnerModule, MarkdownModule, RouterModule],
+  imports: [ButtonModule, ChartModule, MultiSelectModule, FormsModule, StyleClassModule, TableModule, ProgressSpinnerModule, MarkdownModule, RouterModule, AccordionModule],
   providers: [MarkdownService],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -46,6 +48,7 @@ export class DetailsComponent implements OnInit {
   public studyResult: any;
   public data: any;
   public aiResponse: any;
+  public expand = false;
 
   ngOnInit() {
 
