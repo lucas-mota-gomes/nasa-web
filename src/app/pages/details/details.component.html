@@ -20,7 +20,7 @@
             <div class="flex flex-column h-fit w-full gap-4">
                 <div class="flex w-full justify-content-between ">
                     <div class="flex gap-3">
-                        <p-button label="OSDR - {{id}}" class="bg-black-alpha-90 text-white border-round-3xl"
+                        <p-button label="OSD - {{id}}" class="bg-black-alpha-90 text-white border-round-3xl"
                             [style]="{'background-color': 'black', 'border': 'none'}"></p-button>
                         <div
                             class="bg-blue-300 text-black-alpha-90 p-2 px-3 border-round border-black-alpha-90 border-3 justify-content-between align-items-center w-fit">
@@ -32,7 +32,7 @@
                             <b>S</b>
                         </div>
                     </div>
-                    <p-button label="Compare Data" class="bg-black-alpha-90 text-black-alpha-90 border-round"
+                    <p-button [disabled]="aiResponse" (onClick)="getAiresponse()" label="Generate AI resume" class="bg-black-alpha-90 text-black-alpha-90 border-round"
                         [style]="{'background-color': 'black', 'border': 'none'}"></p-button>
                 </div>
 
@@ -51,6 +51,13 @@
             </div>
 
         </div>
+
+        @if (aiResponse) {
+            <div class="border-round border-3 h-fit border-black-alpha-90 p-3 flex-column flex gap-2">
+                <b class="text-400">AI RESUME</b>
+                <markdown [data]="aiResponse" [disableSanitizer]="true"></markdown>
+            </div>
+        }
 
         <div class="border-round border-3 h-fit border-black-alpha-90 p-3 flex-column flex gap-2">
             <b class="text-400">DESCRIPTION</b>

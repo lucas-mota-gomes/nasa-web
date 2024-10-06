@@ -8,6 +8,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { ExperimentService } from '../../service/experiment.service';
 import { TableModule } from 'primeng/table';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 
 interface City {
   name: string,
@@ -17,7 +18,8 @@ interface City {
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [ButtonModule, ChartModule, MultiSelectModule, FormsModule, StyleClassModule, TableModule, ProgressSpinnerModule],
+  imports: [ButtonModule, ChartModule, MultiSelectModule, FormsModule, StyleClassModule, TableModule, ProgressSpinnerModule, MarkdownModule],
+  providers: [MarkdownService],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
   encapsulation: ViewEncapsulation.None
@@ -43,6 +45,7 @@ export class DetailsComponent implements OnInit {
   public sample2Result: any;
   public studyResult: any;
   public data: any;
+  public aiResponse: any;
 
   ngOnInit() {
 
@@ -131,6 +134,13 @@ export class DetailsComponent implements OnInit {
   getExperiment(id: string) {
     this.experimentService.getExperiment(id).subscribe((result) => {
       this.experimentResult = result;
+    });
+  }
+
+  async getAiresponse() {
+    this.aiResponse = 'Generating...';
+    this.experimentService.getAIResult(this.id as string).subscribe((result: any) => {
+      this.aiResponse = result.response;
     });
   }
 

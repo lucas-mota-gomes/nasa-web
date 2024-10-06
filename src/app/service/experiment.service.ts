@@ -38,5 +38,9 @@ export class ExperimentService {
     return this.http.get(`${this.baseUrl}/search/${term}`).pipe(take(1));
   }
 
+  getAIResult(id: string) {
+    return this.http.get(`${this.baseUrl}/assistant/${id}`).pipe(take(1));
+  }
+
 
 }
