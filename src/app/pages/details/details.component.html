@@ -4,7 +4,7 @@
         <img class="w-10rem" src="assets/logo3.png" alt="">
     </div>
 
-    @if(experimentResult && sampleResult) {
+    @if(experimentResult && sampleResult && studyResult) {
     <div class="w-full mt-3 border-round lg:p-4 p-1 flex flex-column gap-4"
         style="background-color: #eaedf3; color: black">
 
@@ -24,7 +24,7 @@
                             [style]="{'background-color': 'black', 'border': 'none'}"></p-button>
                         <div
                             class="bg-blue-300 text-black-alpha-90 p-2 px-3 border-round border-black-alpha-90 border-3 justify-content-between align-items-center w-fit">
-                            <b>{{70}}% IQC</b>
+                            <b>{{studyResult.averageQaScore}} IQC</b>
                         </div>
 
                         <div
@@ -57,55 +57,11 @@
             <p>{{studyResult.description}}</p>
         </div>
 
-        <div class="border-round border-3 h-fit border-black-alpha-90 p-3 flex-column flex gap-2">
-            <b class="text-400">ASSAYS</b>
-                @for (assay of studyResult.assays; track $index) {
-                <div class="flex flex-column gap-3">
-                    <div class="flex justify-content-between">
-                        <div class="text-black-alpha-90 border-black-alpha-90 align-items-start w-fit flex flex-column">
-                            <b>{{assay.technologyType.annotationValue}}</b>
-                            <b class="text-400">Tecnology</b>
-                        </div>
-                        <div class="text-black-alpha-90 border-black-alpha-90 align-items-start w-fit flex flex-column">
-                            <b>{{assay.measurementType.annotationValue}}</b>
-                            <b class="text-400">Measurement</b>
-                        </div>
-                        <div class="text-black-alpha-90 border-black-alpha-90 align-items-start w-fit flex flex-column">
-                            <b>{{assay.technologyPlatform}}</b>
-                            <b class="text-400">Device Platform</b>
-                        </div>
-                    </div>
-                </div>
-                }
-        </div>
-
-        <div class="border-round border-3 h-fit border-black-alpha-90 p-3 flex-column flex gap-2">
-            <div class="flex justify-content-between">
-                <div style="width: 50%;">
-                    <b class="text-400">FACTOR’S</b>
-
-                    @for (factor of studyResult.factors; track $index) {
-                        <p>
-                            <b>{{factor.factorName}}</b>
-                        </p>
-                    }
-                </div>
-                <div style="width: 50%;">
-                    <b class="text-400">ONTOLOGY: CONCEPT</b>
-                    @for (factor of studyResult.factors; track $index) {
-                        <p>
-                            <a [href]="factor.factorType.termAccession"><b>{{factor.factorType.annotationValue}}</b></a>
-                        </p>
-                    }
-                </div>
-            </div>
-        </div>
-
         <div class="flex gap-3">
             <div class="flex flex-column gap-3 w-5">
-
-                <p-multiSelect [options]="colunas" [(ngModel)]="selectedCols" [filter]="false" class="multi"
-                    optionLabel="name" [style]="{'width':'100%', 'color': 'white', 'background-color': 'black'}"
+                <p-multiSelect [options]="getCols(studyResult.assays[0].table.table[0])" [(ngModel)]="selectedCols"
+                    [filter]="false" class="multi"
+                    [style]="{'width':'100%', 'color': 'white', 'background-color': 'black'}"
                     placeholder="Select Cols" />
 
                 <div class="card bg-white border-round p-2">
@@ -114,26 +70,31 @@
             </div>
 
             <div class="w-11 h-full bg-white overflow-hidden border-round data-table">
-                @if (studyResult) {
-                <p-table [paginator]="true" [rows]="4" [value]="studyResult.samples.table"
+                @if (studyResult && selectedCols) {
+                <p-table [paginator]="true" [rows]="4" [value]="studyResult.assays[0].table.table"
                     [tableStyle]="{ 'min-width': '50rem' }">
+                    
                     <ng-template pTemplate="header">
                         <tr>
-                            @for (item of studyResult.samples.header; track $index) {
+                            @for (item of studyResult.assays[0].table.header; track $index) {
+                            @if (selectedCols?.includes(item.field)) {
                             <th scope="col">{{item.title}}</th>
+                            }
                             }
                         </tr>
                     </ng-template>
+        
                     <ng-template pTemplate="body" let-item>
                         <tr>
-                            @for (header of studyResult.samples.header; track $index) {
-                            @if(!isLink(item[header.field])){
+                            @for (header of studyResult.assays[0].table.header; track $index) {
+                            @if (selectedCols?.includes(header.field)) {
+                            @if (!isLink(item[header.field])) {
                             <td>{{item[header.field]}}</td>
-                            }
-                            @else {
+                            } @else {
                             <td>
                                 <div [innerHTML]="item[header.field]"></div>
                             </td>
+                            }
                             }
                             }
                         </tr>
@@ -142,6 +103,50 @@
                 }
             </div>
 
+        </div>
+
+        <div class="border-round border-3 h-fit border-black-alpha-90 p-3 flex-column flex gap-2">
+            <b class="text-400">ASSAYS</b>
+            @for (assay of studyResult.assays; track $index) {
+            <div class="flex flex-column gap-3">
+                <div class="flex justify-content-between">
+                    <div class="text-black-alpha-90 border-black-alpha-90 align-items-start w-fit flex flex-column">
+                        <b>{{assay.technologyType.annotationValue}}</b>
+                        <b class="text-400">Tecnology</b>
+                    </div>
+                    <div class="text-black-alpha-90 border-black-alpha-90 align-items-start w-fit flex flex-column">
+                        <b>{{assay.measurementType.annotationValue}}</b>
+                        <b class="text-400">Measurement</b>
+                    </div>
+                    <div class="text-black-alpha-90 border-black-alpha-90 align-items-start w-fit flex flex-column">
+                        <b>{{assay.technologyPlatform}}</b>
+                        <b class="text-400">Device Platform</b>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="border-round border-3 h-fit border-black-alpha-90 p-3 flex-column flex gap-2">
+            <div class="flex justify-content-between">
+                <div style="width: 50%;">
+                    <b class="text-400">FACTOR’S</b>
+
+                    @for (factor of studyResult.factors; track $index) {
+                    <p>
+                        <b>{{factor.factorName}}</b>
+                    </p>
+                    }
+                </div>
+                <div style="width: 50%;">
+                    <b class="text-400">ONTOLOGY: CONCEPT</b>
+                    @for (factor of studyResult.factors; track $index) {
+                    <p>
+                        <a [href]="factor.factorType.termAccession"><b>{{factor.factorType.annotationValue}}</b></a>
+                    </p>
+                    }
+                </div>
+            </div>
         </div>
     </div>
     }

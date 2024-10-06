@@ -34,7 +34,7 @@ export class DetailsComponent implements OnInit {
 
   colunas!: City[];
 
-  selectedCols!: City[];
+  selectedCols: any = [];
 
   public experimentResult: any;
   public assayResult: any;
@@ -52,6 +52,7 @@ export class DetailsComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
+      this.selectedCols = this.id == '379' ? ['Assay Name', 'Parameter Value[QA Score]'] : ['a100000samplename', 'a100004parametervalueqascore'];
     });
 
     this.getSamples(this.id as string);
@@ -139,6 +140,10 @@ export class DetailsComponent implements OnInit {
       this.basicData.dataSets = result.chartData.datasets;
       this.basicData.labels = result.chartData.labels;
     });
+  }
+
+  getCols(object: any) {
+    return Object.keys(object);
   }
 
   isLink(value: any) {

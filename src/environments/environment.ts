@@ -15,5 +15,5 @@ export const prod_config: any = {
 }
 
 export const environment = {
-  config : prod_config,
+  config : local_config,
 };
