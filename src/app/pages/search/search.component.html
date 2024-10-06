@@ -1,0 +1,56 @@
+<section class="w-screen min-h-screen text-white px-8 py-5" style="background-color: #1e1e1e;">
+    <div class="w-full flex justify-content-start align-items-center gap-8 px-8">
+        <div class="w-7rem h-7rem bg-white border-circle"></div>
+        <h1 class="text-white font-light text-5xl">GALATICS.RATS</h1>
+        <p-autoComplete class="autocomplete-home" [(ngModel)]="selectedItem" [suggestions]="suggestions"
+            [showClear]="true" (completeMethod)="search($event)" placeholder="Search"
+            [dropdown]="true"></p-autoComplete>
+    </div>
+
+    <div class="w-full mt-8 border-round p-4" style="background-color: #eaedf3; color: black">
+        <b>{{999}} RESULTADOS ENCONTRADOS PARA "XXX"</b>
+
+        @for (item of [1,2,3]; track $index) {
+        <div class="my-5 flex gap-4">
+            <div class="w-7rem h-7rem bg-black-alpha-90 border-round-3xl"></div>
+            <div class="w-full flex flex-column gap-2">
+                <div class="flex gap-2 mt-2">
+                    <div
+                        class="bg-black-alpha-90 text-white p-2 px-3 border-round flex justify-content-between align-items-center">
+                        <b>{{665}} - OSD</b>
+                    </div>
+
+                    <div
+                        class="bg-blue-300 text-black-alpha-90 p-2 px-3 border-round ml-8 border-black-alpha-90 border-3 justify-content-between align-items-center">
+                        <b>{{70}}% IQC</b>
+                    </div>
+
+                    <div
+                        class="bg-white text-black-alpha-90 p-2 px-3 border-round border-black-alpha-90 border-3 justify-content-between align-items-center">
+                        <b>{{'G'}}</b>
+                    </div>
+                    <div
+                        class="bg-white text-black-alpha-90 p-2 px-3 border-round border-black-alpha-90 border-3 justify-content-between align-items-center">
+                        <b>{{'I'}}</b>
+                    </div>
+                    <div
+                        class="bg-white text-black-alpha-90 p-2 px-3 border-round border-black-alpha-90 border-3 justify-content-between align-items-center">
+                        <b>{{'I'}}</b>
+                    </div>
+                    <div class="text-black-alpha-90 p-2 px-3 justify-content-between align-items-center">
+                        <b>ORGANISMO:</b>
+                    </div>
+                </div>
+
+                <div class="flex flex-column gap-1">
+                    <b>Transcriptional profiling of right extensor digitorum longus muscle from mice flown on the
+                        RR-23...</b>
+                    <div class="flex gap-8">
+                        <b>Submitted Date: 26-Sep-2023</b> <b>Initial Release Date: 18-Oct-2023</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</section>
